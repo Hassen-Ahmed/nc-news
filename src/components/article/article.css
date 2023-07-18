@@ -90,7 +90,15 @@
     color: black;
     text-decoration: none;
 }
-.article__link:hover {
-    padding-bottom: 0.2rem;
-    text-decoration: underline;
+
+.article-comments {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.25);
 }

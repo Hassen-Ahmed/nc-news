@@ -6,21 +6,16 @@ export const NewsDataContext = createContext();
 export const NewsDataProvider = ({ children }) => {
     const [user, setUser] = useState("tickle122");
     const [userList, setUserList] = useState([]);
-    const [articleForComment, setArticleForComment] = useState({});
+    const [activeArticle, setActiveArticle] = useState(null);
 
     useEffect(() => {
         getAllUsers().then((users) => {
             setUserList(users);
         });
     }, []);
-    useEffect(() => {
-        console.log(articleForComment);
-    }, [articleForComment]);
 
     return (
-        <NewsDataContext.Provider
-            value={{ user, userList, articleForComment, setArticleForComment }}
-        >
+        <NewsDataContext.Provider value={{ user, userList, activeArticle, setActiveArticle }}>
             {children}
         </NewsDataContext.Provider>
     );

@@ -6,8 +6,7 @@ import { NewsDataContext } from "../../data/NewData";
 
 const Article = ({ article, userList }) => {
     const [userAvatar, setUserAvatar] = useState("");
-
-    const { setArticleForComment } = useContext(NewsDataContext);
+    const { setActiveArticle } = useContext(NewsDataContext);
 
     useEffect(() => {
         const response = userList.filter((user) => user.username === article.author);
@@ -17,9 +16,8 @@ const Article = ({ article, userList }) => {
     }, []);
 
     const date = new Date(article.created_at);
-
-    function articleCommentHandler() {
-        setArticleForComment(article);
+    function activeArticleHandler() {
+        setActiveArticle(article);
     }
 
     return (
@@ -37,7 +35,10 @@ const Article = ({ article, userList }) => {
                 </div>
             </div>
 
-            <p className="article__profile--title">{article.title}</p>
+            <Link to="/article-comments" className="article__link" onClick={activeArticleHandler}>
+                <p className="article__profile--title">{article.title}</p>{" "}
+            </Link>
+
             <div className="article__img--container">
                 <img src={article.article_img_url} alt={article.title} />
             </div>
@@ -47,8 +48,13 @@ const Article = ({ article, userList }) => {
                     <p>{article.votes}</p>
                     <BiSolidLike className="article__like-btn" />
                 </div>
-                <Link to="/article-comments" className="article__link">
-                    <p onClick={articleCommentHandler}>{article.comments_count} comments</p>
+
+                <Link
+                    to="/article-comments"
+                    className="article__link"
+                    onClick={activeArticleHandler}
+                >
+                    <p>{article.comments_count} comments</p>{" "}
                 </Link>
             </div>
         </section>
