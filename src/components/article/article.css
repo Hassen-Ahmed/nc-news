@@ -118,8 +118,17 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(128, 128, 128, 0.25);
 }
-.article__loading {
+.loading-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.loading {
     padding-top: 5rem;
+    font-size: 3rem;
+    font-family: "Roboto";
 }
 
 @media screen and (min-width: 600px) {
