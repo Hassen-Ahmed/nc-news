@@ -6,6 +6,7 @@ import { NewsDataContext } from "../../data/NewData";
 
 const Article = ({ article, userList }) => {
     const [userAvatar, setUserAvatar] = useState("");
+    const [isMore, setIsMore] = useState(false);
     const { setActiveArticle } = useContext(NewsDataContext);
 
     useEffect(() => {
@@ -16,8 +17,15 @@ const Article = ({ article, userList }) => {
     }, []);
 
     const date = new Date(article.created_at);
+
     function activeArticleHandler() {
         setActiveArticle(article);
+    }
+
+    function setIsMoreHandler() {
+        setIsMore((currenIsMore) => {
+            return currenIsMore ? false : true;
+        });
     }
 
     return (
@@ -36,12 +44,23 @@ const Article = ({ article, userList }) => {
             </div>
 
             <Link to="/article-comments" className="article__link" onClick={activeArticleHandler}>
-                <p className="article__profile--title">{article.title}</p>{" "}
+                <p className="article__profile--title">{article.title}</p>
             </Link>
-
-            <div className="article__img--container">
-                <img src={article.article_img_url} alt={article.title} />
+            <div className="article__profile--body-container">
+                <p className="article__profile--body">
+                    {article.body.length < 60 || isMore
+                        ? article.body
+                        : article.body.slice(0, 60) + "  ..."}
+                </p>
+                {!article.body.length < 60 ? (
+                    <button onClick={setIsMoreHandler}>show {isMore ? "less" : "more"}</button>
+                ) : null}
             </div>
+            <Link to="/article-comments" className="article__link" onClick={activeArticleHandler}>
+                <div className="article__img--container">
+                    <img src={article.article_img_url} alt={article.title} />
+                </div>
+            </Link>
 
             <div className="article__profile--bottom">
                 <div className="article__profile--bottom-1">
@@ -54,7 +73,7 @@ const Article = ({ article, userList }) => {
                     className="article__link"
                     onClick={activeArticleHandler}
                 >
-                    <p>{article.comments_count} comments</p>{" "}
+                    <p>{article.comments_count} comments</p>
                 </Link>
             </div>
         </section>
