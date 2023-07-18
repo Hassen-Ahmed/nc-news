@@ -1,13 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSolidLike } from "react-icons/bi";
 import "./article.css";
 import { Link } from "react-router-dom";
-import { NewsDataContext } from "../../data/NewData";
 
 const Article = ({ article, userList }) => {
     const [userAvatar, setUserAvatar] = useState("");
-    const [isMore, setIsMore] = useState(false);
-    const { setActiveArticle } = useContext(NewsDataContext);
 
     useEffect(() => {
         const response = userList.filter((user) => user.username === article.author);
@@ -17,16 +14,6 @@ const Article = ({ article, userList }) => {
     }, []);
 
     const date = new Date(article.created_at);
-
-    function activeArticleHandler() {
-        setActiveArticle(article);
-    }
-
-    function setIsMoreHandler() {
-        setIsMore((currenIsMore) => {
-            return currenIsMore ? false : true;
-        });
-    }
 
     return (
         <section className="article">
@@ -43,20 +30,8 @@ const Article = ({ article, userList }) => {
                 </div>
             </div>
 
-            <Link to="/article-comments" className="article__link" onClick={activeArticleHandler}>
-                <p className="article__profile--title">{article.title}</p>
-            </Link>
-            <div className="article__profile--body-container">
-                <p className="article__profile--body">
-                    {article.body.length < 60 || isMore
-                        ? article.body
-                        : article.body.slice(0, 60) + "  ..."}
-                </p>
-                {!article.body.length < 60 ? (
-                    <button onClick={setIsMoreHandler}>show {isMore ? "less" : "more"}</button>
-                ) : null}
-            </div>
-            <Link to="/article-comments" className="article__link" onClick={activeArticleHandler}>
+            <Link to={`/article/${article.article_id}`} className="article__link">
+                <p className="article__profile--title">{article.title}</p>{" "}
                 <div className="article__img--container">
                     <img src={article.article_img_url} alt={article.title} />
                 </div>
@@ -68,12 +43,8 @@ const Article = ({ article, userList }) => {
                     <BiSolidLike className="article__like-btn" />
                 </div>
 
-                <Link
-                    to="/article-comments"
-                    className="article__link"
-                    onClick={activeArticleHandler}
-                >
-                    <p>{article.comments_count} comments</p>
+                <Link to={`/article/${article.article_id}`} className="article__link">
+                    <p>{article.comments_count} comments</p>{" "}
                 </Link>
             </div>
         </section>

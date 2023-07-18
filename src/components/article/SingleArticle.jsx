@@ -1,19 +1,31 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NewsDataContext } from "../../data/NewData";
+import { useParams } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
+import { getArticleById } from "../../utils/api";
+import { NewsDataContext } from "../../data/NewData";
 
-const ArticleComments = () => {
+const SingleArticle = () => {
+    const [singleArticle, setSingleArticle] = useState(null);
     const [userAvatar, setUserAvatar] = useState("");
     const [isMore, setIsMore] = useState(false);
-    const { activeArticle, userList } = useContext(NewsDataContext);
+    const { userList } = useContext(NewsDataContext);
+    const { article_id } = useParams();
 
     useEffect(() => {
-        const response = userList.filter((user) => user.username === activeArticle.author);
-        const avatar = response[0].avatar_url;
-        setUserAvatar(avatar);
+        getArticleById(article_id).then((article) => {
+            setSingleArticle(article);
+        });
     }, []);
 
-    const date = new Date(activeArticle.created_at);
+    useEffect(() => {
+        if (singleArticle) {
+            const response = userList.filter((user) => user.username === singleArticle.author);
+            const avatar = response[0].avatar_url;
+            setUserAvatar(avatar);
+        }
+    }, [singleArticle, article_id]);
+
+    const date = new Date(singleArticle?.created_at);
 
     function setIsMoreHandler() {
         setIsMore((currenIsMore) => {
@@ -23,31 +35,31 @@ const ArticleComments = () => {
 
     return (
         <>
-            {activeArticle ? (
+            {singleArticle ? (
                 <section className="article-comments">
                     <div className="article__profile--top">
                         <div className="article__profile--pic">
                             <img
                                 src={userAvatar}
-                                alt={`profile picture of ${activeArticle.author}`}
+                                alt={`profile picture of ${singleArticle.author}`}
                             />
                         </div>
 
                         <div>
-                            <h2>{activeArticle.author}</h2>
+                            <h2>{singleArticle.author}</h2>
                             <p className="article__profile--date">
                                 {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
                             </p>
                         </div>
                     </div>
-                    <p className="article__profile--title">{activeArticle.title}</p>
+                    <p className="article__profile--title">{singleArticle.title}</p>
                     <div className="article__profile--body-container">
                         <p className="article__profile--body">
-                            {activeArticle.body.length < 100 || isMore
-                                ? activeArticle.body
-                                : activeArticle.body.slice(0, 100) + "  ..."}
+                            {singleArticle.body.length < 100 || isMore
+                                ? singleArticle.body
+                                : singleArticle.body.slice(0, 100) + "  ..."}
                         </p>
-                        {!activeArticle.body.length < 100 ? (
+                        {!singleArticle.body.length < 100 ? (
                             <button onClick={setIsMoreHandler}>
                                 show {isMore ? "less" : "more"}
                             </button>
@@ -55,22 +67,19 @@ const ArticleComments = () => {
                     </div>
 
                     <div className="article__img--container">
-                        <img src={activeArticle.article_img_url} alt={activeArticle.title} />
+                        <img src={singleArticle.article_img_url} alt={singleArticle.title} />
                     </div>
                     <div className="article__profile--bottom">
                         <div className="article__profile--bottom-1">
-                            <p>{activeArticle.votes}</p>
+                            <p>{singleArticle.votes}</p>
                             <BiSolidLike className="article__like-btn" />
                         </div>
-                        <p>{activeArticle.comments_count} comments</p>
+                        <p>{singleArticle.comments_count} comments</p>
                     </div>
                 </section>
-            ) : (
-                <p>Loading</p>
-            )}
-            ;
+            ) : null}
         </>
     );
 };
 
-export default ArticleComments;
+export default SingleArticle;

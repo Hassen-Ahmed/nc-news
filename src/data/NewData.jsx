@@ -6,7 +6,6 @@ export const NewsDataContext = createContext();
 export const NewsDataProvider = ({ children }) => {
     const [user, setUser] = useState("tickle122");
     const [userList, setUserList] = useState([]);
-    const [activeArticle, setActiveArticle] = useState(null);
 
     useEffect(() => {
         getAllUsers().then((users) => {
@@ -15,8 +14,6 @@ export const NewsDataProvider = ({ children }) => {
     }, []);
 
     return (
-        <NewsDataContext.Provider value={{ user, userList, activeArticle, setActiveArticle }}>
-            {children}
-        </NewsDataContext.Provider>
+        <NewsDataContext.Provider value={{ user, userList }}>{children}</NewsDataContext.Provider>
     );
 };

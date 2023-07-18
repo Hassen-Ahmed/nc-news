@@ -118,6 +118,9 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba(128, 128, 128, 0.25);
 }
+.article__loading {
+    padding-top: 5rem;
+}
 
 @media screen and (min-width: 600px) {
     .article-list {
