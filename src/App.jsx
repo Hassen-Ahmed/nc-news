@@ -5,7 +5,7 @@ import Home from "./components/Home";
 import NewTopic from "./components/NewTopic";
 import SignIn from "./components/SignIn";
 import Profile from "./components/Profile";
-import ArticleComments from "./components/article/ArticleComments";
+import SingleArticle from "./components/article/SingleArticle";
 
 function App() {
     return (
@@ -16,7 +16,7 @@ function App() {
                 <Route path="/newtopic" element={<NewTopic />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/article-comments" element={<ArticleComments />} />
+                <Route path="/article/:article_id" element={<SingleArticle />} />
             </Routes>
         </main>
     );

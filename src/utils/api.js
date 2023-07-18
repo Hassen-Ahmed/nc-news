@@ -14,3 +14,13 @@ export const getAllUsers = () => {
         return users;
     });
 };
+
+export const getArticleById = (article_id) => {
+    return ncNewApi.get(`/articles/${article_id}`).then(({ data: { articles } }) => {
+        return articles;
+    });
+};
+
+// export const getCommentsByArticleId = () => {
+//     return ncNewApi.get(`/articles/${article_id}`);
+// };

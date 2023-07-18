@@ -11,6 +11,13 @@ const ArticleList = () => {
         getAllArticles().then((articlesData) => setArticles(articlesData));
     }, []);
 
+    if (!articles.length)
+        return (
+            <div className="loading-container">
+                <p className="loading">Loading ...</p>
+            </div>
+        );
+
     return (
         <div className="article-list">
             {articles.map((article) => {
