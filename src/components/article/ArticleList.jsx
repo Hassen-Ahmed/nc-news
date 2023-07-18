@@ -1,9 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Article from "./Article";
 import { NewsDataContext } from "../../data/NewData";
+import { getAllArticles } from "../../utils/api";
 
 const ArticleList = () => {
-    const { articles, userList } = useContext(NewsDataContext);
+    const { userList } = useContext(NewsDataContext);
+    const [articles, setArticles] = useState([]);
+
+    useEffect(() => {
+        getAllArticles().then((articlesData) => setArticles(articlesData));
+    }, []);
 
     return (
         <div className="article-list">
@@ -13,5 +19,4 @@ const ArticleList = () => {
         </div>
     );
 };
-
 export default ArticleList;

@@ -1,9 +1,10 @@
+import CreateTopicButton from "./CreateTopicButton";
 import ArticleList from "./article/ArticleList";
 
 const Home = () => {
     return (
         <div>
-            {/* <CreateTopicButton /> */}
+            <CreateTopicButton />
             <ArticleList />
         </div>
     );
