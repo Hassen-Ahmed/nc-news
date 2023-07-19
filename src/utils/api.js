@@ -5,7 +5,7 @@ const ncNewApi = axios.create({
 });
 
 export const getAllArticles = (limit, p) => {
-    return ncNewApi.get(`/articles?limit=${limit}&p=${p}`).then(({ data: { articles } }) => {
+    return ncNewApi.get(`/articles`, { params: { limit, p } }).then(({ data: { articles } }) => {
         return articles;
     });
 };

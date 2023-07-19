@@ -36,17 +36,6 @@ const Article = ({ article, userList }) => {
                     <img src={article.article_img_url} alt={article.title} />
                 </div>
             </Link>
-
-            <div className="article__profile--bottom">
-                <div className="article__profile--bottom-1">
-                    <p>{article.votes}</p>
-                    <BiSolidLike className="article__like-btn" />
-                </div>
-
-                <Link to={`/article/${article.article_id}`} className="article__link">
-                    <p>{article.comments_count} comments</p>{" "}
-                </Link>
-            </div>
         </section>
     );
 };

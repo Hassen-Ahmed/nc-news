@@ -122,11 +122,32 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    padding-top: 10%;
 }
 .loading {
     padding-top: 5rem;
     font-size: 3rem;
+    font-weight: 400;
     font-family: "Roboto";
+}
+.loading__heart {
+    color: rgb(67, 196, 55);
+    font-size: 2rem;
+    animation-name: heart;
+    animation-duration: 0.6s;
+    animation-timing-function: ease;
+    animation-iteration-count: infinite;
+}
+@keyframes heart {
+    10% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.4);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 .article-single {
     display: flex;
