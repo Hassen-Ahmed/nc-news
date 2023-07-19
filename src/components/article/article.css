@@ -138,6 +138,10 @@
     animation-timing-function: ease;
     animation-iteration-count: infinite;
 }
+.like-btn {
+    pointer-events: none;
+    filter: brightness(0.7);
+}
 @keyframes heart {
     10% {
         transform: scale(1);

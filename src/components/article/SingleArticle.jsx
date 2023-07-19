@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
-import { getArticleById } from "../../utils/api";
+import { getArticleById, patchArticleById } from "../../utils/api";
 import { NewsDataContext } from "../../data/NewData";
 import CommentList from "./CommentList";
 
@@ -11,6 +11,9 @@ const SingleArticle = () => {
     const [userAvatar, setUserAvatar] = useState("");
     const [isMore, setIsMore] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [newVote, setNewVote] = useState(0);
+    const [isError, setIsError] = useState(false);
+
     const { userList } = useContext(NewsDataContext);
     const { article_id } = useParams();
 
@@ -41,6 +44,18 @@ const SingleArticle = () => {
     function setIsMoreHandler() {
         setIsMore((currenIsMore) => {
             return currenIsMore ? false : true;
+        });
+    }
+    function handlerVoteLike() {
+        setNewVote((currenNewVote) => {
+            return currenNewVote + 1;
+        });
+
+        patchArticleById(article_id).catch((err) => {
+            setNewVote((currenNewVote) => {
+                return currenNewVote - 1;
+            });
+            setIsError(true);
         });
     }
 
@@ -85,12 +100,16 @@ const SingleArticle = () => {
                         </div>
                         <div className="article__profile--bottom">
                             <div className="article__profile--bottom-1">
-                                <p>{singleArticle.votes}</p>
-                                <BiSolidLike className="article__like-btn" />
+                                <p>{+singleArticle.votes + newVote}</p>
+
+                                <BiSolidLike
+                                    className={`article__like-btn ${newVote > 0 ? "like-btn" : ""}`}
+                                    onClick={handlerVoteLike}
+                                />
                             </div>
                             <p>
                                 {singleArticle.comment_count > 0
-                                    ? `${singleArticle.comment_count} comments`
+                                    ? `${+singleArticle.comment_count} comments`
                                     : "No comments yet."}
                             </p>
                         </div>
