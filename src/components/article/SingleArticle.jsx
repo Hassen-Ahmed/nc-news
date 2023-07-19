@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
 import { getArticleById } from "../../utils/api";
 import { NewsDataContext } from "../../data/NewData";
+import CommentList from "./CommentList";
 
 const SingleArticle = () => {
     const [singleArticle, setSingleArticle] = useState(null);
@@ -40,40 +41,46 @@ const SingleArticle = () => {
             </div>
         );
     return (
-        <section className="article-comments">
-            <div className="article__profile--top">
-                <div className="article__profile--pic">
-                    <img src={userAvatar} alt={`profile picture of ${singleArticle.author}`} />
-                </div>
+        <section className="article-single">
+            <div className="article-single--only">
+                <div className="article__profile--top">
+                    <div className="article__profile--pic">
+                        <img src={userAvatar} alt={`profile picture of ${singleArticle.author}`} />
+                    </div>
 
-                <div>
-                    <h2>{singleArticle.author}</h2>
-                    <p className="article__profile--date">
-                        {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
+                    <div>
+                        <h2>{singleArticle.author}</h2>
+                        <p className="article__profile--date">
+                            {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
+                        </p>
+                    </div>
+                </div>
+                <p className="article__profile--title">{singleArticle.title}</p>
+                <div className="article__profile--body-container">
+                    <p className="article__profile--body">
+                        {singleArticle.body.length < 150 || isMore
+                            ? singleArticle.body
+                            : singleArticle.body.slice(0, 150) + "  ..."}
                     </p>
+                    {singleArticle.body.length > 150 ? (
+                        <button onClick={setIsMoreHandler}>show {isMore ? "less" : "more"}</button>
+                    ) : null}
                 </div>
-            </div>
-            <p className="article__profile--title">{singleArticle.title}</p>
-            <div className="article__profile--body-container">
-                <p className="article__profile--body">
-                    {singleArticle.body.length < 100 || isMore
-                        ? singleArticle.body
-                        : singleArticle.body.slice(0, 100) + "  ..."}
-                </p>
-                {!singleArticle.body.length < 100 ? (
-                    <button onClick={setIsMoreHandler}>show {isMore ? "less" : "more"}</button>
-                ) : null}
+
+                <div className="article__img--container">
+                    <img src={singleArticle.article_img_url} alt={singleArticle.title} />
+                </div>
+                <div className="article__profile--bottom">
+                    <div className="article__profile--bottom-1">
+                        <p>{singleArticle.votes}</p>
+                        <BiSolidLike className="article__like-btn" />
+                    </div>
+                    <p>{singleArticle.comment_count} comments</p>
+                </div>
             </div>
 
-            <div className="article__img--container">
-                <img src={singleArticle.article_img_url} alt={singleArticle.title} />
-            </div>
-            <div className="article__profile--bottom">
-                <div className="article__profile--bottom-1">
-                    <p>{singleArticle.votes}</p>
-                    <BiSolidLike className="article__like-btn" />
-                </div>
-                <p>{singleArticle.comments_count} comments</p>
+            <div className="comment-list--container">
+                <CommentList article_id={article_id} />
             </div>
         </section>
     );

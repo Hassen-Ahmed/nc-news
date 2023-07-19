@@ -8,7 +8,7 @@ const ArticleList = () => {
     const [articles, setArticles] = useState([]);
 
     useEffect(() => {
-        getAllArticles().then((articlesData) => setArticles(articlesData));
+        getAllArticles(5, 1).then((articlesData) => setArticles(articlesData));
     }, []);
 
     if (!articles.length)

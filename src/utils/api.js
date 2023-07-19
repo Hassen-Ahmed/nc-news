@@ -4,11 +4,12 @@ const ncNewApi = axios.create({
     baseURL: "https://news-api-d5x1.onrender.com/api",
 });
 
-export const getAllArticles = () => {
-    return ncNewApi.get("/articles").then(({ data: { articles } }) => {
+export const getAllArticles = (limit, p) => {
+    return ncNewApi.get(`/articles?limit=${limit}&p=${p}`).then(({ data: { articles } }) => {
         return articles;
     });
 };
+
 export const getAllUsers = () => {
     return ncNewApi.get("/users").then(({ data: { users } }) => {
         return users;
@@ -21,6 +22,8 @@ export const getArticleById = (article_id) => {
     });
 };
 
-// export const getCommentsByArticleId = () => {
-//     return ncNewApi.get(`/articles/${article_id}`);
-// };
+export const getCommentsByArticleId = (article_id) => {
+    return ncNewApi.get(`/articles/${article_id}/comments`).then(({ data: { comments } }) => {
+        return comments;
+    });
+};
