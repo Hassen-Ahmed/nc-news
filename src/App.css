@@ -36,7 +36,20 @@ html {
 }
 .nav__link {
     color: white;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+}
+.nav__link--profile {
+    width: 2rem;
+    height: 2rem;
+    padding: 0.2rem;
+    display: flex;
+    border-radius: 50%;
+    border: 2px solid rgb(88, 88, 88);
+    background-color: white;
+}
+.nav__link--profile img {
+    width: 100%;
+    object-fit: cover;
 }
 
 @media screen and (min-width: 600px) {

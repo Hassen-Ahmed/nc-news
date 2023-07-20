@@ -27,3 +27,9 @@ export const getCommentsByArticleId = (article_id) => {
         return comments;
     });
 };
+
+export const patchArticleById = (article_id, vote) => {
+    return ncNewApi.patch(`/articles/${article_id}`, { inc_votes: vote }).then(({ data }) => {
+        return data;
+    });
+};
