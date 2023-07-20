@@ -33,3 +33,17 @@ export const patchArticleById = (article_id, vote) => {
         return data;
     });
 };
+
+export const postCommentById = (body, article_id, author, votes, created_at) => {
+    return ncNewApi
+        .post(`/articles/${article_id}/comments`, {
+            body,
+            article_id,
+            author,
+            votes,
+            created_at,
+        })
+        .then(({ data }) => {
+            return data;
+        });
+};

@@ -30,7 +30,7 @@ const Article = ({ article, userList }) => {
                 </div>
             </div>
 
-            <Link to={`/article/${article.article_id}`} className="article__link">
+            <Link to={`/articles/${article.article_id}`} className="article__link">
                 <p className="article__profile--title">{article.title}</p>{" "}
                 <div className="article__img--container">
                     <img src={article.article_img_url} alt={article.title} />
