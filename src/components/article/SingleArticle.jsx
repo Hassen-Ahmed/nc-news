@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
+import { BiSolidDislike } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
 import { getArticleById, patchArticleById } from "../../utils/api";
 import { NewsDataContext } from "../../data/NewData";
@@ -24,13 +25,13 @@ const SingleArticle = () => {
     }, []);
 
     useEffect(() => {
-        if (singleArticle) {
+        if (singleArticle && userList.length) {
             const response = userList.filter((user) => user.username === singleArticle.author);
             const avatar = response[0].avatar_url;
             setUserAvatar(avatar);
             setIsLoading(false);
         }
-    }, [singleArticle, article_id]);
+    }, [singleArticle, userList]);
 
     const date = new Date(singleArticle?.created_at);
     const loading = (
@@ -46,12 +47,12 @@ const SingleArticle = () => {
             return currenIsMore ? false : true;
         });
     }
-    function handlerVoteLike() {
+    function handlerVoteLike(vote) {
         setNewVote((currenNewVote) => {
-            return currenNewVote + 1;
+            return currenNewVote + vote;
         });
 
-        patchArticleById(article_id).catch((err) => {
+        patchArticleById(article_id, vote).catch((err) => {
             setNewVote((currenNewVote) => {
                 return currenNewVote - 1;
             });
@@ -101,11 +102,27 @@ const SingleArticle = () => {
                         <div className="article__profile--bottom">
                             <div className="article__profile--bottom-1">
                                 <p>{+singleArticle.votes + newVote}</p>
-
-                                <BiSolidLike
-                                    className={`article__like-btn ${newVote > 0 ? "like-btn" : ""}`}
-                                    onClick={handlerVoteLike}
-                                />
+                                {newVote === 0 ? (
+                                    <button
+                                        aria-label="like this comment"
+                                        className="article__vote-btn"
+                                    >
+                                        <BiSolidLike
+                                            className="article__like-btn"
+                                            onClick={() => handlerVoteLike(1)}
+                                        />
+                                    </button>
+                                ) : (
+                                    <button
+                                        aria-label="dislike this comment"
+                                        className="article__vote-btn"
+                                    >
+                                        <BiSolidDislike
+                                            className="article__like-btn"
+                                            onClick={() => handlerVoteLike(-1)}
+                                        />
+                                    </button>
+                                )}
                             </div>
                             <p>
                                 {singleArticle.comment_count > 0
@@ -113,6 +130,9 @@ const SingleArticle = () => {
                                     : "No comments yet."}
                             </p>
                         </div>
+                        {isError ? (
+                            <p className="wrong__vote">Sorry something went wrong! Try later.</p>
+                        ) : null}
                     </div>
 
                     <div className="comment-list--container">
