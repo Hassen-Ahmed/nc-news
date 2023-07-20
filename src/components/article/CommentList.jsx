@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
 import { getCommentsByArticleId } from "../../utils/api";
 
-function CommentList({ article_id }) {
+function CommentList({ article_id, isSent }) {
     const [comments, setComments] = useState([]);
+
     useEffect(() => {
         getCommentsByArticleId(article_id).then((comments) => {
             setComments(comments);
         });
-    }, []);
+    }, [isSent]);
 
     return (
         <section className="comment-list">
