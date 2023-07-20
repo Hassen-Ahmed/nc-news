@@ -175,10 +175,10 @@
 }
 .empty-comment-box {
     position: absolute;
-    bottom: -1.5rem;
+    bottom: -1.8rem;
     left: 30%;
     padding: 0.4rem;
-    border: 1px solid red;
+    border: 1px solid rgb(130, 130, 130);
     border-radius: 1rem;
     background-color: rgb(255, 255, 255);
     color: red;

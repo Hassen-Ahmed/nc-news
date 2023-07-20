@@ -18,6 +18,7 @@ const SingleArticle = () => {
 
     const [comment, setComment] = useState("");
     const [isSent, setIsSent] = useState(false);
+    const [isSendSuccessful, setIsSendSuccessful] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
 
     const { user, userList } = useContext(NewsDataContext);
@@ -81,18 +82,22 @@ const SingleArticle = () => {
                 user,
                 singleArticle.votes,
                 singleArticle.created_at
-            ).then(() => {
-                setIsSent((currentIsSent) => {
-                    return currentIsSent ? false : true;
+            )
+                .then(() => {
+                    setIsSent((currentIsSent) => {
+                        return currentIsSent ? false : true;
+                    });
+                    setComment("");
+                })
+                .catch(() => {
+                    setIsSendSuccessful(true);
                 });
-            });
         }
         if (comment.trim().length) {
             setIsEmpty(false);
         } else {
             setIsEmpty(true);
         }
-        setComment("");
     }
 
     return (
@@ -191,6 +196,12 @@ const SingleArticle = () => {
                         {isEmpty ? (
                             <div className="empty-comment-box">
                                 <p>Add some comment.</p>
+                            </div>
+                        ) : null}
+
+                        {isSendSuccessful ? (
+                            <div className="empty-comment-box">
+                                <p>Sorry something went Wrong Try later!</p>
                             </div>
                         ) : null}
                     </div>
