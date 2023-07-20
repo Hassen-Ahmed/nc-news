@@ -13,10 +13,11 @@ function App() {
             <Nav />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/articles" element={<Home />} />
                 <Route path="/newtopic" element={<NewTopic />} />
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/profile" element={<Profile />} />
-                <Route path="/article/:article_id" element={<SingleArticle />} />
+                <Route path="/articles/:article_id" element={<SingleArticle />} />
             </Routes>
         </main>
     );
