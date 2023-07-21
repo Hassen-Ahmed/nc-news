@@ -6,12 +6,15 @@ https://hassen-abdela-nc-news.netlify.app/articles/34
 
 # Features
 
+Nc-news is a social-news aggregation app in the style of Reddit.
+
+Features.
+
 -   View all articles
 -   View a specific article
--   Filter, sort and/or order articles via queries
--   View, post and delete comments on articles
--   Upvote or downvote an article
--   View all users
+-   Filter, sort and order articles
+-   View, post and delete comments
+-   like or dislike an article
 
 # Back End Github link
 
@@ -27,8 +30,7 @@ If you want to see you node version just run "node -v" in your terminal.
 # To clone this repository:
 
 git clone: https://github.com/Hassen-Ahmed/News-API.git
-Change into this repos directory:
 
-Install dependencies
+# Install dependencies
 
-finally npm install in your terminal
+"npm install" in your terminal
