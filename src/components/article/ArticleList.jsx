@@ -4,16 +4,16 @@ import { AiFillHeart } from "react-icons/ai";
 import { NewsDataContext } from "../../data/NewData";
 import { getAllArticles } from "../../utils/api";
 
-const ArticleList = ({ topic }) => {
+const ArticleList = ({ topic, sort_by, order }) => {
     const { userList } = useContext(NewsDataContext);
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     useEffect(() => {
-        getAllArticles(topic).then((articlesData) => {
+        getAllArticles(topic, sort_by, order).then((articlesData) => {
             setArticles(articlesData);
             setIsLoading(false);
         });
-    }, [topic]);
+    }, [topic, sort_by, order]);
 
     const loading = (
         <div className="loading-container">
