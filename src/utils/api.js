@@ -55,3 +55,7 @@ export const getAllTopics = () => {
         return topics.topics;
     });
 };
+
+export const deleteCommentById = (comment_id) => {
+    return ncNewApi.delete(`/comments/${comment_id}`);
+};

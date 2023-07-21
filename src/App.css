@@ -88,7 +88,7 @@ html {
 .topics-drop-down ul li {
     margin: 0.2rem 5vw 0.2rem 2rem;
     font-size: 1.2rem;
-    /* color: rgba(0, 0, 0, 0.7); */
+    color: rgba(0, 0, 0, 0.6);
     text-transform: capitalize;
     cursor: pointer;
     transition: all 0.1s ease;
