@@ -56,6 +56,7 @@ const Nav = () => {
             obj.sort_by = params.sort_by;
         }
         setSearchParams(obj);
+        handlerDropdown();
     }
 
     return (
@@ -90,7 +91,6 @@ const Nav = () => {
                             <p>Order</p>
                             <li
                                 onClick={() => {
-                                    handlerDropdown();
                                     handleUrlOrder("asc");
                                 }}
                             >
@@ -98,7 +98,6 @@ const Nav = () => {
                             </li>
                             <li
                                 onClick={() => {
-                                    handlerDropdown();
                                     handleUrlOrder("desc");
                                 }}
                             >

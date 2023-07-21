@@ -2,13 +2,16 @@ import React, { useContext, useState } from "react";
 import "./comment.css";
 import { NewsDataContext } from "../../data/NewData";
 import { BiSolidLike } from "react-icons/bi";
+import { MdDeleteForever } from "react-icons/md";
 
-function Comment({ comment }) {
-    const { userList } = useContext(NewsDataContext);
+function Comment({ comment, handleDeleteComment }) {
+    const { user, userList } = useContext(NewsDataContext);
     const [userAvatar, setUserAvatar] = useState(
         userList.filter((user) => user.username === comment.author)[0].avatar_url
     );
     const [isMore, setIsMore] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
 
     const date = new Date(comment?.created_at);
 
@@ -17,6 +20,7 @@ function Comment({ comment }) {
             return currenIsMore ? false : true;
         });
     }
+
     return (
         <section className="comment">
             <div className="comment__profile--top">
@@ -44,6 +48,24 @@ function Comment({ comment }) {
             </div>
 
             <div className="comment__profile--bottom">
+                {comment.author === user ? (
+                    <div>
+                        {isError ? <p className="comment__Error">Something went Wrong!</p> : null}
+
+                        {!isDeleted ? (
+                            <MdDeleteForever
+                                className="comment__like-btn--delete"
+                                onClick={() => {
+                                    setIsDeleted(true);
+                                    handleDeleteComment(comment.comment_id).catch(() => {
+                                        setIsError(true);
+                                        setIsDeleted(false);
+                                    });
+                                }}
+                            />
+                        ) : null}
+                    </div>
+                ) : null}
                 <div className="comment__profile--bottom-1">
                     <p>{comment.votes}</p>
                     <BiSolidLike className="comment__like-btn" />
