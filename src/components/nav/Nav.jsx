@@ -62,7 +62,7 @@ const Nav = () => {
     return (
         <div className="nav">
             <h1>Nc-News</h1>
-            <Link to="/">
+            <Link to="/" aria-label="home link">
                 <ImHome className="nav__link" />
             </Link>
 
@@ -108,7 +108,7 @@ const Nav = () => {
                         <p>Topics: </p>
                         <ul>
                             <li>
-                                <Link to="/" onClick={handlerDropdown}>
+                                <Link to="/" aria-label="link home" onClick={handlerDropdown}>
                                     - all -
                                 </Link>
                             </li>
@@ -117,6 +117,7 @@ const Nav = () => {
                                 return (
                                     <li key={topic}>
                                         <Link
+                                            aria-label={topic + " link"}
                                             to={`/articles?topic=${topic}`}
                                             onClick={handlerDropdown}
                                         >
@@ -130,7 +131,7 @@ const Nav = () => {
                 ) : null}
             </div>
 
-            <Link to="/profile">
+            <Link to="/profile" aria-label="profile link">
                 {currentUserAvatar ? (
                     <div className="nav__link--profile">
                         <img src={currentUserAvatar} alt="current user profile." />

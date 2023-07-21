@@ -30,8 +30,12 @@ const Article = ({ article, userList }) => {
                 </div>
             </div>
 
-            <Link to={`/articles/${article.article_id}`} className="article__link">
-                <p className="article__profile--title">{article.title}</p>{" "}
+            <Link
+                aria-label="articles link"
+                to={`/articles/${article.article_id}`}
+                className="article__link"
+            >
+                <p className="article__profile--title">{article.title}</p>
                 <div className="article__img--container">
                     <img
                         src={article.article_img_url}

@@ -123,7 +123,7 @@ const SingleArticle = () => {
                             <div className="article__profile--pic">
                                 <img
                                     src={authorAvatar}
-                                    alt={`profile picture of ${singleArticle.author}`}
+                                    alt={`profile picture ${singleArticle.author}`}
                                 />
                             </div>
 
@@ -190,9 +190,12 @@ const SingleArticle = () => {
                         <div className="comment-box__profile-img">
                             <img src={userAvatar} alt="user profile picture" />
                         </div>
+                        <label htmlFor="comment-box" style={{ display: "none" }}>
+                            comment:
+                        </label>
                         <textarea
-                            name=""
-                            id=""
+                            name="comment-box"
+                            id="comment-box"
                             cols="30"
                             rows={
                                 Math.ceil(comment.length / (window.innerWidth > 500 ? 40 : 18)) || 1

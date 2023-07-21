@@ -160,13 +160,9 @@
     outline: none;
 }
 .comment-box__send {
-    width: 2.5rem;
-    height: 2.5rem;
     margin-top: 0.3rem;
-    padding: 0.5rem;
+    padding: 0.7rem 0.5rem;
     font-size: 1.2rem;
-    border: 2px solid rgb(84, 94, 198);
-    border-radius: 50%;
 
     display: flex;
     justify-content: center;
@@ -182,11 +178,23 @@
     position: absolute;
     bottom: -1.8rem;
     left: 30%;
+    margin-top: 1rem;
     padding: 0.4rem;
-    border: 1px solid rgb(130, 130, 130);
+    border: 1px solid rgb(199, 63, 63);
     border-radius: 1rem;
     background-color: rgb(255, 255, 255);
-    color: red;
+}
+.empty-comment-box::after {
+    position: absolute;
+    content: "";
+    border-top: 10px solid #db3434;
+    border-left: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid transparent;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%, -100%) rotate(180deg);
+    display: block;
 }
 .loading-container {
     width: 100%;
