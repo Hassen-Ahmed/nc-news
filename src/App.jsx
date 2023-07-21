@@ -6,6 +6,7 @@ import NewTopic from "./components/NewTopic";
 import SignIn from "./components/SignIn";
 import Profile from "./components/Profile";
 import SingleArticle from "./components/article/SingleArticle";
+import Error from "./components/Error";
 
 function App() {
     return (
@@ -18,6 +19,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/articles/:article_id" element={<SingleArticle />} />
+                <Route path="*" element={<Error msg="Wrong url" />} />
             </Routes>
         </main>
     );

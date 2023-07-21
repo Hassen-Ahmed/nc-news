@@ -12,6 +12,9 @@
 html {
     font-size: 100%;
 }
+body {
+    position: relative;
+}
 
 .app {
     background-color: rgb(255, 255, 255);
@@ -103,6 +106,17 @@ html {
     font-weight: 400;
 }
 
+.error-url {
+    display: flex;
+    justify-content: center;
+    padding-top: 20rem;
+}
+.error-url p {
+    font-size: 1.2rem;
+    padding: 1rem 5rem;
+    background-color: rgb(217, 83, 60);
+}
+
 @media screen and (min-width: 400px) {
     .topics-drop-down {
         left: 40%;
@@ -115,10 +129,16 @@ html {
     .topics-drop-down {
         left: 50%;
     }
+    .error-url p {
+        font-size: 2rem;
+    }
 }
 
 @media screen and (min-width: 1200px) {
     .nav {
         padding: 0 20%;
+    }
+    .error-url p {
+        font-size: 3rem;
     }
 }

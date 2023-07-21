@@ -7,6 +7,7 @@ import { BsFillSendFill } from "react-icons/bs";
 import { getArticleById, patchArticleById, postCommentById } from "../../utils/api";
 import { NewsDataContext } from "../../data/NewData";
 import CommentList from "./CommentList";
+import Error from "../Error";
 
 const SingleArticle = () => {
     const [singleArticle, setSingleArticle] = useState(null);
@@ -21,15 +22,21 @@ const SingleArticle = () => {
     const [isSendSuccessful, setIsSendSuccessful] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
 
+    const [isWrongId, setIsWrongId] = useState(false);
+
     const { user, userList } = useContext(NewsDataContext);
     const [userAvatar, setUserAvatar] = useState("");
 
     const { article_id } = useParams();
 
     useEffect(() => {
-        getArticleById(article_id).then((article) => {
-            setSingleArticle(article);
-        });
+        getArticleById(article_id)
+            .then((article) => {
+                setSingleArticle(article);
+            })
+            .catch(() => {
+                setIsWrongId(true);
+            });
     }, []);
 
     useEffect(() => {
@@ -57,6 +64,7 @@ const SingleArticle = () => {
             </p>
         </div>
     );
+
     function setIsMoreHandler() {
         setIsMore((currenIsMore) => {
             return currenIsMore ? false : true;
@@ -103,7 +111,11 @@ const SingleArticle = () => {
     return (
         <>
             {isLoading ? (
-                loading
+                !isWrongId ? (
+                    loading
+                ) : (
+                    <Error msg="  Article Does Not Exist!" />
+                )
             ) : (
                 <section className="article-single">
                     <div className="article-single--only">
