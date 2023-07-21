@@ -1,36 +1,73 @@
-# Nc-News
+## Hello welcome to Nc-News
 
-# Deployed link
+Nc-news is a social news aggregation app most likely Reddit.
 
-https://hassen-abdela-nc-news.netlify.app/articles/34
-
-# Features
-
-Nc-news is a social-news aggregation app in the style of Reddit.
+### Features
 
 Features.
 
--   View all articles
--   View a specific article
--   Filter, sort and order articles
--   View, post and delete comments
--   like or dislike an article
+-   View all articles.
+-   View a specific article.
+-   Sort and order articles.
+-   View, post and delete comments.
+-   like or dislike an article.
+-   Create new topic.
+-   Create new User by sing up.
 
-# Back End Github link
+### Deployed link for Front End
 
-https://github.com/Hassen-Ahmed/News-API
+-   https://hassen-abdela-nc-news.netlify.app/articles/34
 
-# Node Version
+### Back End Github link
 
-minimum version of node required to run this project locally
-Node version: v20.2.0
+-   https://github.com/Hassen-Ahmed/News-API
 
-If you want to see you node version just run "node -v" in your terminal.
+### Node Version
 
-# To clone this repository:
+-   Minimum version of node required to run this project locally Node version: v20.2.0 .
 
-git clone: https://github.com/Hassen-Ahmed/News-API.git
+-   If you want to see your node version, run this in the terminal:
 
-# Install dependencies
+```
+node - v
+```
 
-"npm install" in your terminal
+-   or
+
+```
+node --version
+```
+
+### To clone this repository
+
+-   In your terminal
+
+```jsx
+git clone https://github.com/Hassen-Ahmed/News-API.git
+```
+
+```jsx
+cd nc-news
+```
+
+-   Install dependencies :
+
+```jsx
+npm install
+```
+
+-   To start the App on localhost :
+
+```jsx
+npm run dev
+```
+
+-   or
+
+```jsx
+npm run dev -- --host
+```
+
+Thank for visiting my Full Stack project, If like my project please feel free to hire me or star this repo or send me any feedbacks/comments/queries/questions that will be my pleasure.
+
+Again Thank so much! Goodbye👋️
