@@ -10,7 +10,11 @@ const Nav = () => {
     const [currentUserAvatar, setCurrentUserAvatar] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const [topics, setTopics] = useState([]);
+
     const { user, userList } = useContext(NewsDataContext);
+
+    const { searchParams, setSearchParams } = useContext(NewsDataContext);
+    const params = Object.fromEntries([...searchParams]);
 
     useEffect(() => {
         getAllTopics().then((topicsData) => {
@@ -32,6 +36,27 @@ const Nav = () => {
             return currenIsVisible ? false : true;
         });
     }
+    function handleUrlSortBy(sort_by) {
+        const obj = { sort_by: sort_by };
+        if (params.topic) {
+            obj.topic = params.topic;
+        }
+        if (params.order) {
+            obj.order = params.order;
+        }
+
+        setSearchParams(obj);
+    }
+    function handleUrlOrder(order) {
+        const obj = { order: order };
+        if (params.topic) {
+            obj.topic = params.topic;
+        }
+        if (params.sort_by) {
+            obj.sort_by = params.sort_by;
+        }
+        setSearchParams(obj);
+    }
 
     return (
         <div className="nav">
@@ -46,35 +71,59 @@ const Nav = () => {
                     <div className="topics-drop-down">
                         <ul>
                             <p>Sort by</p>
-                            {["date", "comment_count", "votes"].map((elm) => {
+                            {["created_at", "comments_count", "votes"].map((elm) => {
                                 return (
-                                    <li key={elm} onClick={handlerDropdown}>
+                                    <li
+                                        key={elm}
+                                        onClick={() => {
+                                            handlerDropdown();
+                                            handleUrlSortBy(elm);
+                                        }}
+                                    >
                                         {elm}
                                     </li>
                                 );
                             })}
                         </ul>
+
                         <ul>
                             <p>Order</p>
-                            <li>ascending</li>
-                            <li>descending</li>
+                            <li
+                                onClick={() => {
+                                    handlerDropdown();
+                                    handleUrlOrder("asc");
+                                }}
+                            >
+                                ascending
+                            </li>
+                            <li
+                                onClick={() => {
+                                    handlerDropdown();
+                                    handleUrlOrder("desc");
+                                }}
+                            >
+                                descending
+                            </li>
                         </ul>
 
                         <p>Topics: </p>
                         <ul>
-                            <Link to="/articles" onClick={handlerDropdown}>
-                                <li>- all -</li>
-                            </Link>
+                            <li>
+                                <Link to="/" onClick={handlerDropdown}>
+                                    - all -
+                                </Link>
+                            </li>
 
                             {topics.map((topic) => {
                                 return (
-                                    <Link
-                                        key={topic}
-                                        to={`/articles?topic=${topic}`}
-                                        onClick={handlerDropdown}
-                                    >
-                                        <li value={topic}>- {topic} -</li>
-                                    </Link>
+                                    <li key={topic}>
+                                        <Link
+                                            to={`/articles?topic=${topic}`}
+                                            onClick={handlerDropdown}
+                                        >
+                                            - {topic} -
+                                        </Link>
+                                    </li>
                                 );
                             })}
                         </ul>
