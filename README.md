@@ -2,7 +2,7 @@
 
 # Deployed link
 
-https://cute-nc-news.netlify.app/
+https://hassen-abdela-nc-news.netlify.app/articles/34
 
 # Features
 
