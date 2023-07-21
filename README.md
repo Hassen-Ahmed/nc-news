@@ -4,8 +4,6 @@ Nc-news is a social news aggregation app most likely Reddit.
 
 ### Features
 
-Features.
-
 -   View all articles.
 -   View a specific article.
 -   Sort and order articles.
