@@ -33,7 +33,10 @@ const Article = ({ article, userList }) => {
             <Link to={`/articles/${article.article_id}`} className="article__link">
                 <p className="article__profile--title">{article.title}</p>{" "}
                 <div className="article__img--container">
-                    <img src={article.article_img_url} alt={article.title} />
+                    <img
+                        src={article.article_img_url}
+                        alt={`profile picture of ${article.author}`}
+                    />
                 </div>
             </Link>
         </section>

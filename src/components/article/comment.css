@@ -93,8 +93,6 @@
     margin-left: 0.5rem;
     font-size: 1.6rem;
     color: rgb(184, 70, 48);
-    border: 1px solid rgb(184, 70, 48);
-    box-shadow: -0.2rem 0.2rem 0rem rgba(0, 0, 0, 0.15);
     border-radius: 50%;
     transition: all 0.1s ease;
 }
