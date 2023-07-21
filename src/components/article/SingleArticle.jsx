@@ -182,7 +182,9 @@ const SingleArticle = () => {
                             name=""
                             id=""
                             cols="30"
-                            rows={Math.ceil(comment.length / 40) || 1}
+                            rows={
+                                Math.ceil(comment.length / (window.innerWidth > 500 ? 40 : 18)) || 1
+                            }
                             placeholder="add comment..."
                             value={comment}
                             onChange={(e) => {
