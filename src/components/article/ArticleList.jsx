@@ -37,7 +37,7 @@ const ArticleList = ({ topic, sort_by, order }) => {
                 !isWrongId ? (
                     loading
                 ) : (
-                    <Error msg=" Wrong query!" />
+                    <Error msg=" Something Wrong! Try later please." />
                 )
             ) : (
                 <div className="article-list">

@@ -114,7 +114,7 @@ const SingleArticle = () => {
                 !isWrongId ? (
                     loading
                 ) : (
-                    <Error msg="  Article not Exist!" />
+                    <Error msg="  Article Does Not Exist!" />
                 )
             ) : (
                 <section className="article-single">
