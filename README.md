@@ -22,9 +22,8 @@ Nc-news is a social news aggregation app most likely Reddit.
 
 ### Node Version
 
--   Minimum version of node required to run this project locally Node version: v20.2.0 .
-
--   If you want to see your node version, run this in the terminal:
+Minimum version of node required to run this project locally Node version: v20.2.0 .
+If you want to see your node version, run this in the terminal:
 
 ```
 node - v
