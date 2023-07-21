@@ -37,6 +37,10 @@ html {
 .nav__link {
     color: white;
     font-size: 1.6rem;
+    transition: all 0.2s ease;
+}
+.nav__link:active {
+    transform: translateY(0.2rem);
 }
 .nav__link--profile {
     width: 2rem;
@@ -52,11 +56,67 @@ html {
     object-fit: cover;
 }
 
+.topics-drop-down {
+    position: absolute;
+    top: 3.5rem;
+    left: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1rem 2rem;
+    border-bottom-left-radius: 0.4rem;
+    border-bottom-right-radius: 0.4rem;
+    border: 5px solid rgba(217, 83, 60, 0.25);
+    border-top: 0px solid white;
+    border-bottom: 10px solid rgba(217, 83, 60, 0.25);
+    background-color: white;
+    box-shadow: 0.2rem 0.2rem 1rem rgba(0, 0, 0, 0.15);
+}
+.topics-drop-down p {
+    margin-right: 0.6rem;
+    margin-bottom: 0.6rem;
+    color: rgb(19, 19, 19);
+}
+.topics-drop-down ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.topics-drop-down ul li {
+    margin: 0.2rem 5vw 0.2rem 2rem;
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.7);
+    text-transform: capitalize;
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+.topics-drop-down ul a {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.6);
+}
+.topics-drop-down ul li:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    color: rgb(217, 83, 60);
+    font-weight: 400;
+}
+
+@media screen and (min-width: 400px) {
+    .topics-drop-down {
+        left: 40%;
+    }
+}
 @media screen and (min-width: 600px) {
     .nav {
         padding: 0 10%;
     }
+    .topics-drop-down {
+        left: 50%;
+    }
 }
+
 @media screen and (min-width: 1200px) {
     .nav {
         padding: 0 20%;
