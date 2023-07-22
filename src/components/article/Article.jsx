@@ -1,19 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { BiSolidLike } from "react-icons/bi";
-import "./article.css";
 import { Link } from "react-router-dom";
 
 const Article = ({ article, userList }) => {
     const [userAvatar, setUserAvatar] = useState("");
+    const date = new Date(article.created_at);
+    const dateStructured = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
 
     useEffect(() => {
         const response = userList.filter((user) => user.username === article.author);
-
         const avatar = response[0].avatar_url;
         setUserAvatar(avatar);
     }, []);
-
-    const date = new Date(article.created_at);
 
     return (
         <section className="article">
@@ -21,12 +18,9 @@ const Article = ({ article, userList }) => {
                 <div className="article__profile--pic">
                     <img src={userAvatar} alt={`profile picture of ${article.author}`} />
                 </div>
-
                 <div>
                     <h2>{article.author}</h2>
-                    <p className="article__profile--date">
-                        {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
-                    </p>
+                    <p className="article__profile--date">{dateStructured}</p>
                 </div>
             </div>
 

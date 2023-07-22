@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import Article from "./Article";
 import { AiFillHeart } from "react-icons/ai";
-import { NewsDataContext } from "../../data/NewData";
+import { NewsDataContext } from "../../context/NewData";
 import { getAllArticles } from "../../utils/api";
-import Error from "../Error";
+import Article from "./Article";
+import Error from "../error/Error";
 
 const ArticleList = ({ topic, sort_by, order }) => {
-    const { userList } = useContext(NewsDataContext);
     const [articles, setArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [isWrongId, setIsWrongId] = useState(false);
+    const { userList } = useContext(NewsDataContext);
 
     useEffect(() => {
         getAllArticles(topic, sort_by, order)
@@ -17,9 +17,7 @@ const ArticleList = ({ topic, sort_by, order }) => {
                 setArticles(articlesData);
                 setIsLoading(false);
             })
-            .catch(() => {
-                setIsWrongId(true);
-            });
+            .catch(() => setIsWrongId(true));
     }, [topic, sort_by, order]);
 
     const loading = (

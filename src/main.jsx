@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css";
+import "./index.scss";
 import { BrowserRouter } from "react-router-dom";
-import { NewsDataProvider } from "./data/NewData.jsx";
+import { NewsDataProvider } from "./context/NewData.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>

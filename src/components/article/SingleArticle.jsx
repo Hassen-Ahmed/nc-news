@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 import { BiSolidLike } from "react-icons/bi";
 import { BiSolidDislike } from "react-icons/bi";
 import { AiFillHeart } from "react-icons/ai";
-import { BsFillSendFill } from "react-icons/bs";
+
 import { getArticleById, patchArticleById, postCommentById } from "../../utils/api";
-import { NewsDataContext } from "../../data/NewData";
-import CommentList from "./CommentList";
-import Error from "../Error";
+import { NewsDataContext } from "../../context/NewData";
+import Error from "../error/Error";
+import CommentList from "../comment/CommentList";
+import BoxComment from "./BoxComment";
 
 const SingleArticle = () => {
     const [singleArticle, setSingleArticle] = useState(null);
@@ -16,27 +17,30 @@ const SingleArticle = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [newVote, setNewVote] = useState(0);
     const [isError, setIsError] = useState(false);
-
     const [comment, setComment] = useState("");
     const [isSent, setIsSent] = useState(false);
     const [isSendSuccessful, setIsSendSuccessful] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
-
     const [isWrongId, setIsWrongId] = useState(false);
-
-    const { user, userList } = useContext(NewsDataContext);
     const [userAvatar, setUserAvatar] = useState("");
-
+    const { user, userList } = useContext(NewsDataContext);
     const { article_id } = useParams();
+
+    const date = new Date(singleArticle?.created_at);
+    const dateStructured = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+    const loading = (
+        <div className="loading-container">
+            <p className="loading">
+                Loading ...
+                <AiFillHeart className="loading__heart" />
+            </p>
+        </div>
+    );
 
     useEffect(() => {
         getArticleById(article_id)
-            .then((article) => {
-                setSingleArticle(article);
-            })
-            .catch(() => {
-                setIsWrongId(true);
-            });
+            .then((article) => setSingleArticle(article))
+            .catch(() => setIsWrongId(true));
     }, []);
 
     useEffect(() => {
@@ -55,30 +59,14 @@ const SingleArticle = () => {
         }
     }, [singleArticle, userList]);
 
-    const date = new Date(singleArticle?.created_at);
-    const loading = (
-        <div className="loading-container">
-            <p className="loading">
-                Loading ...
-                <AiFillHeart className="loading__heart" />
-            </p>
-        </div>
-    );
-
     function setIsMoreHandler() {
-        setIsMore((currenIsMore) => {
-            return currenIsMore ? false : true;
-        });
+        setIsMore((currenIsMore) => (currenIsMore ? false : true));
     }
     function handlerVoteLike(vote) {
-        setNewVote((currenNewVote) => {
-            return currenNewVote + vote;
-        });
+        setNewVote((currenNewVote) => currenNewVote + vote);
 
-        patchArticleById(article_id, vote).catch((err) => {
-            setNewVote((currenNewVote) => {
-                return currenNewVote - 1;
-            });
+        patchArticleById(article_id, vote).catch(() => {
+            setNewVote((currenNewVote) => currenNewVote - 1);
             setIsError(true);
         });
     }
@@ -86,14 +74,10 @@ const SingleArticle = () => {
         if (comment.trim().length) {
             postCommentById(comment, article_id, user, 0, singleArticle.created_at)
                 .then(() => {
-                    setIsSent((currentIsSent) => {
-                        return currentIsSent ? false : true;
-                    });
+                    setIsSent((currentIsSent) => (currentIsSent ? false : true));
                     setComment("");
                 })
-                .catch(() => {
-                    setIsSendSuccessful(true);
-                });
+                .catch(() => setIsSendSuccessful(true));
         }
         if (comment.trim().length) {
             setIsEmpty(false);
@@ -114,7 +98,7 @@ const SingleArticle = () => {
                 <section className="article-single">
                     <div className="article-single--only">
                         <div className="article__profile--top">
-                            <div className="article__profile--pic">
+                            <div className="article__profile--pic" title="user profile">
                                 <img
                                     src={authorAvatar}
                                     alt={`profile picture ${singleArticle.author}`}
@@ -123,9 +107,7 @@ const SingleArticle = () => {
 
                             <div>
                                 <h2>{singleArticle.author}</h2>
-                                <p className="article__profile--date">
-                                    {date.getDate()}/{date.getMonth()}/{date.getFullYear()}
-                                </p>
+                                <p className="article__profile--date">{dateStructured}</p>
                             </div>
                         </div>
                         <p className="article__profile--title">{singleArticle.title}</p>
@@ -157,12 +139,16 @@ const SingleArticle = () => {
                                             className="article__like-btn"
                                             onClick={() => handlerVoteLike(1)}
                                         >
-                                            <BiSolidLike aria-label="like button for article" />
+                                            <BiSolidLike
+                                                aria-label="like button for article"
+                                                title="like"
+                                            />
                                         </div>
                                     </button>
                                 ) : (
                                     <button
                                         aria-label="dislike this comment"
+                                        title="dislike"
                                         className="article__vote-btn"
                                     >
                                         <BiSolidDislike
@@ -182,40 +168,16 @@ const SingleArticle = () => {
                             <p className="wrong__vote">Sorry something went wrong! Try later.</p>
                         ) : null}
                     </div>
-                    <div className="article__comment-box">
-                        <div className="comment-box__profile-img">
-                            <img src={userAvatar} alt="user profile picture" />
-                        </div>
-                        <label htmlFor="comment-box">comment:</label>
-                        <textarea
-                            name="comment-box"
-                            id="comment-box"
-                            cols="30"
-                            rows={
-                                Math.ceil(comment.length / (window.innerWidth > 500 ? 40 : 18)) || 1
-                            }
-                            placeholder="add comment..."
-                            value={comment}
-                            onChange={(e) => {
-                                setComment(e.target.value);
-                                setIsEmpty(false);
-                            }}
-                        />
-                        <div className="comment-box__send" onClick={handlerSend}>
-                            <BsFillSendFill aria-label="send button" />
-                        </div>
-                        {isEmpty ? (
-                            <div className="empty-comment-box">
-                                <p>Add some comment.</p>
-                            </div>
-                        ) : null}
 
-                        {isSendSuccessful ? (
-                            <div className="empty-comment-box">
-                                <p>Sorry something went Wrong Try later!</p>
-                            </div>
-                        ) : null}
-                    </div>
+                    <BoxComment
+                        userAvatar={userAvatar}
+                        comment={comment}
+                        setComment={setComment}
+                        setIsEmpty={setIsEmpty}
+                        isEmpty={isEmpty}
+                        isSendSuccessful={isSendSuccessful}
+                        handlerSend={handlerSend}
+                    />
 
                     <div className="comment-list--container">
                         <CommentList article_id={article_id} isSent={isSent} />

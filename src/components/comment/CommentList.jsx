@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Comment from "./Comment";
-import { deleteCommentById, getCommentsByArticleId } from "../../utils/api";
 import _ from "lodash";
+import { deleteCommentById, getCommentsByArticleId } from "../../utils/api";
 
 function CommentList({ article_id, isSent }) {
     const [comments, setComments] = useState([]);

@@ -1,7 +1,7 @@
 import CreateTopicButton from "./CreateTopicButton";
 import ArticleList from "./article/ArticleList";
 import { useContext } from "react";
-import { NewsDataContext } from "../data/NewData";
+import { NewsDataContext } from "../context/NewData";
 
 const Home = () => {
     const { searchParams } = useContext(NewsDataContext);

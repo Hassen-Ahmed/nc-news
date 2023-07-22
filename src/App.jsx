@@ -1,12 +1,13 @@
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
+// import "./styles/app.scss";
+
 import Nav from "./components/nav/Nav";
 import Home from "./components/Home";
 import NewTopic from "./components/NewTopic";
 import SignIn from "./components/SignIn";
 import Profile from "./components/Profile";
 import SingleArticle from "./components/article/SingleArticle";
-import Error from "./components/Error";
+import Error from "./components/error/Error";
 
 function App() {
     return (

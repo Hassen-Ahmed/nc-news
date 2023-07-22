@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
-import "./comment.css";
-import { NewsDataContext } from "../../data/NewData";
 import { BiSolidLike } from "react-icons/bi";
 import { MdDeleteForever } from "react-icons/md";
+import { NewsDataContext } from "../../context/NewData";
 
 function Comment({ comment, handleDeleteComment }) {
     const { user, userList } = useContext(NewsDataContext);
@@ -25,7 +24,7 @@ function Comment({ comment, handleDeleteComment }) {
         <section className="comment">
             <div className="comment__profile--top">
                 <div className="comment__profile--top-1">
-                    <div className="comment__profile--pic">
+                    <div className="comment__profile--pic" title="user profile">
                         <img src={userAvatar} alt={`profile picture of ${comment.author}`} />
                     </div>
                     <h2>{comment.author}</h2>
@@ -55,6 +54,7 @@ function Comment({ comment, handleDeleteComment }) {
                         {!isDeleted ? (
                             <div
                                 className="comment__like-btn--delete"
+                                title="delete"
                                 onClick={() => {
                                     setIsDeleted(true);
                                     handleDeleteComment(comment.comment_id).catch(() => {
@@ -70,7 +70,7 @@ function Comment({ comment, handleDeleteComment }) {
                 ) : (
                     <span></span>
                 )}
-                <div className="comment__profile--bottom-1">
+                <div className="comment__profile--bottom-1" title="like">
                     <p>{comment.votes}</p>
                     <div className="comment__like-btn">
                         <BiSolidLike aria-label="like button for comment" />

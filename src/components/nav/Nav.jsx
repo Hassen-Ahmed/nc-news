@@ -3,16 +3,14 @@ import { Link } from "react-router-dom";
 import { ImHome } from "react-icons/im";
 import { CgMenuRight } from "react-icons/cg";
 import { FaUserCircle } from "react-icons/fa";
-import { NewsDataContext } from "../../data/NewData";
+import { NewsDataContext } from "../../context/NewData";
 import { getAllTopics } from "../../utils/api";
 
 const Nav = () => {
     const [currentUserAvatar, setCurrentUserAvatar] = useState();
     const [isVisible, setIsVisible] = useState(false);
     const [topics, setTopics] = useState([]);
-
     const { user, userList } = useContext(NewsDataContext);
-
     const { searchParams, setSearchParams } = useContext(NewsDataContext);
     const params = Object.fromEntries([...searchParams]);
 
@@ -62,7 +60,7 @@ const Nav = () => {
     return (
         <div className="nav">
             <h1>Nc-News</h1>
-            <Link to="/" aria-label="home link">
+            <Link to="/" aria-label="home link" title="Nc-news Home">
                 <ImHome className="nav__link" />
             </Link>
 
