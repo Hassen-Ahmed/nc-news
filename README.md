@@ -14,7 +14,7 @@ Nc-news is a social news aggregation app most likely Reddit.
 
 ### Deployed link for Front End
 
--   https://hassen-abdela-nc-news.netlify.app/articles/34
+-   https://hassen-abdela-nc-news.netlify.app/
 
 ### Back End Github link
 
