@@ -84,13 +84,7 @@ const SingleArticle = () => {
     }
     function handlerSend() {
         if (comment.trim().length) {
-            postCommentById(
-                comment,
-                article_id,
-                user,
-                singleArticle.votes,
-                singleArticle.created_at
-            )
+            postCommentById(comment, article_id, user, 0, singleArticle.created_at)
                 .then(() => {
                     setIsSent((currentIsSent) => {
                         return currentIsSent ? false : true;
@@ -159,10 +153,12 @@ const SingleArticle = () => {
                                         aria-label="like this comment"
                                         className="article__vote-btn"
                                     >
-                                        <BiSolidLike
+                                        <div
                                             className="article__like-btn"
                                             onClick={() => handlerVoteLike(1)}
-                                        />
+                                        >
+                                            <BiSolidLike aria-label="like button for article" />
+                                        </div>
                                     </button>
                                 ) : (
                                     <button
@@ -190,9 +186,7 @@ const SingleArticle = () => {
                         <div className="comment-box__profile-img">
                             <img src={userAvatar} alt="user profile picture" />
                         </div>
-                        <label htmlFor="comment-box" style={{ display: "none" }}>
-                            comment:
-                        </label>
+                        <label htmlFor="comment-box">comment:</label>
                         <textarea
                             name="comment-box"
                             id="comment-box"
@@ -207,8 +201,8 @@ const SingleArticle = () => {
                                 setIsEmpty(false);
                             }}
                         />
-                        <div className="comment-box__send">
-                            <BsFillSendFill onClick={handlerSend} />
+                        <div className="comment-box__send" onClick={handlerSend}>
+                            <BsFillSendFill aria-label="send button" />
                         </div>
                         {isEmpty ? (
                             <div className="empty-comment-box">

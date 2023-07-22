@@ -53,7 +53,7 @@ function Comment({ comment, handleDeleteComment }) {
                         {isError ? <p className="comment__Error">Something went Wrong!</p> : null}
 
                         {!isDeleted ? (
-                            <MdDeleteForever
+                            <div
                                 className="comment__like-btn--delete"
                                 onClick={() => {
                                     setIsDeleted(true);
@@ -62,13 +62,19 @@ function Comment({ comment, handleDeleteComment }) {
                                         setIsDeleted(false);
                                     });
                                 }}
-                            />
+                            >
+                                <MdDeleteForever aria-label="delete button" />
+                            </div>
                         ) : null}
                     </div>
-                ) : null}
+                ) : (
+                    <span></span>
+                )}
                 <div className="comment__profile--bottom-1">
                     <p>{comment.votes}</p>
-                    <BiSolidLike className="comment__like-btn" />
+                    <div className="comment__like-btn">
+                        <BiSolidLike aria-label="like button for comment" />
+                    </div>
                 </div>
             </div>
         </section>

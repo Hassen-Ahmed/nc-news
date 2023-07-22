@@ -102,9 +102,20 @@
     font-weight: 400;
 }
 .article__like-btn {
+    width: 2.5rem;
+    height: 2.5rem;
     margin-left: 0.5rem;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: rgb(139, 156, 232);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.3rem;
+    transition: all 0.2s ease;
+}
+.article__like-btn:hover {
+    background-color: rgba(194, 194, 194, 0.35);
 }
 
 .article__link {
@@ -133,7 +144,7 @@
     position: relative;
 }
 .comment-box__profile-img {
-    width: 2.5rem;
+    width: 200%;
     height: 2.5rem;
 
     padding: 0.2rem;
@@ -143,8 +154,12 @@
     border-radius: 50%;
     background-color: white;
     border: 2px solid rgb(88, 88, 88);
+    overflow: hidden;
 }
 .comment-box__profile-img img {
+    display: block;
+    /* width: 100%; */
+    /* height: 100%; */
     object-fit: cover;
 }
 
@@ -152,24 +167,34 @@
     background-color: rgba(230, 230, 230, 0.45);
     padding: 0.5rem 1rem;
     margin: 0 0.5rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
     border-radius: 2rem;
     resize: none;
     overflow: hidden;
     align-self: center;
     outline: none;
 }
+.article__comment-box label {
+    display: none;
+}
+
 .comment-box__send {
-    margin-top: 0.3rem;
-    padding: 0.7rem 0.5rem;
-    font-size: 1.2rem;
+    width: 2rem;
+    height: 2rem;
+    margin-top: 0.6rem;
+    padding: 0.5rem;
+    font-size: 1.5rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
     color: rgb(84, 94, 198);
+    border-radius: 50%;
     transform: translateY(-0.2rem);
     transition: all 0.2s ease;
+}
+.comment-box__send:hover {
+    background-color: rgba(194, 194, 194, 0.35);
 }
 .comment-box__send:active {
     transform: translateY(0.2rem);
@@ -270,6 +295,11 @@
     }
 }
 
+@media screen and (min-width: 400px) {
+    .comment-box__profile-img {
+        width: 2.5rem;
+    }
+}
 @media screen and (min-width: 700px) {
     .article-list {
         width: 60%;
