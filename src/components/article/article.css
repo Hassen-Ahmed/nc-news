@@ -144,7 +144,7 @@
     position: relative;
 }
 .comment-box__profile-img {
-    width: 200%;
+    width: 2.5rem;
     height: 2.5rem;
 
     padding: 0.2rem;
@@ -295,11 +295,6 @@
     }
 }
 
-@media screen and (min-width: 400px) {
-    .comment-box__profile-img {
-        width: 2.5rem;
-    }
-}
 @media screen and (min-width: 700px) {
     .article-list {
         width: 60%;
